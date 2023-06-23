@@ -1,4 +1,5 @@
 import React from 'react';
+import { DataTable } from './DataTable';
 
 /**
  * Composition of player
@@ -6,8 +7,6 @@ import React from 'react';
  */
 export const Cricketers: React.FC<{}> = () => {
   return (
-    <div style={{height: 200,width: 300, background: 'red'}}>
-      {"Cricketers"}
-    </div>
+    <DataTable />
   );
 };

@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import * as serviceWorker from './serviceWorkerRegistration';
 import { MainRoutes } from './routes';
+import "antd/dist/antd.css";
 
 
 (async () => {
