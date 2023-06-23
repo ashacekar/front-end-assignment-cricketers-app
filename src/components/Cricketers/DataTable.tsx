@@ -3,6 +3,7 @@ import { ConfigProvider, Table, Card, Button } from 'antd';
 import { EmptyTable } from './EmptyTable';
 import getPlayers, { TPlayer } from '../../data/get-players';
 import { Link } from 'react-router-dom';
+import { getPersistedValue, setPersistenceValue, usePersistence } from '../../hooks/usePersistence';
 
 export const DataTable: React.FC<{}> = () => {
   const [pageNumber, setPageNumber] = useState(1);
@@ -11,8 +12,12 @@ export const DataTable: React.FC<{}> = () => {
   const [data,setData] = useState<TPlayer[]>([]);
   const [filterData,setFilterData] = useState<TPlayer[]>([]);
   const [filterOptions,setFilterOptions] = useState<String[]>([]);
-  const [filterSelected,setFilterSelected] = useState<String>("");
-  const [nameSearch, setNameSearch] = useState("");
+  const [filterSelected,setFilterSelected] = usePersistence(
+    "filterSelected",
+    getPersistedValue("filterSelected")?getPersistedValue("filterSelected") : "");
+  const [nameSearch, setNameSearch] = usePersistence(
+    "nameSearch",
+    getPersistedValue("nameSearch")? getPersistedValue("nameSearch") : "");
 
   const convertMsToAge = (ms:number) => {
     return Math.floor(ms / 31536000000)
@@ -83,26 +88,64 @@ export const DataTable: React.FC<{}> = () => {
   };
 
   const filterColumnByType = (filterType: String) => {
-    setFilterSelected(filterType);
+    if(filterType!==filterSelected){
+      setFilterSelected(filterType);
+      setPersistenceValue("filterSelected", filterType);
+    }else{
+      setFilterSelected("");
+    }
   }
 
   useEffect(()=>{
+    if(filterSelected!==""){
     const newData = data.filter(d => {
-    return d.type === filterSelected;
+    return d.type === filterSelected && (d.name?.toLowerCase() === nameSearch.toLowerCase() || d.name?.toLowerCase()?.includes(nameSearch.toLowerCase() as string));
     } )
-    setTotal(newData.length);
+    setTotal(newData.length); //move hooks
     setFilterData(newData);
-  },[filterSelected])
+    }else{
+      setTotal(data.length); //move hooks
+    setFilterData(data);
+    }
+  },[filterSelected,data,nameSearch])
 
   const searchByName = (event: any) => {
     const name = event.target.value;
     setNameSearch(name);
+    setPersistenceValue("nameSearch", nameSearch);
     const newData = data.filter(d => {
-    return d.name?.toLowerCase() === name.toLowerCase() || d.name?.toLowerCase()?.includes(name.toLowerCase() as string) ;
+    return (d.name?.toLowerCase() === name.toLowerCase() || d.name?.toLowerCase()?.includes(name.toLowerCase() as string)) && d.type === filterSelected;
     } )
     setTotal(newData.length);
     setFilterData(newData);
   }
+
+    useEffect(()=>{
+    let appSettings: object[] = [];
+    interface LooseObject {
+    [key: string]: object 
+  }
+    const userSettings: LooseObject = {};
+    const userIdentity = `cricket-app-user`;
+    userSettings[userIdentity] = {}     // set obj in an obj
+     if (localStorage.hasOwnProperty('appSettings')) {
+          // eslint-disable-next-line
+          appSettings = JSON.parse(localStorage.getItem('appSettings') as string);
+        }
+        
+        // push userSettings into an array for the 1st time
+        if (appSettings.length === 0) {
+          appSettings.push(userSettings);
+        } else {
+          const userKeys = Object.keys(Object.assign({}, ...appSettings));
+          //  push only when user not exist 
+          if (!userKeys.includes(userIdentity)) {
+            appSettings.push(userSettings);
+          }
+        }
+        localStorage.setItem('username', JSON.stringify(userIdentity));
+        localStorage.setItem('appSettings', JSON.stringify(appSettings));
+  },[filterData])
     
   
 
@@ -116,7 +159,9 @@ export const DataTable: React.FC<{}> = () => {
           {
             filterOptions.map((f)=>{
               if(f){
-                return <Button onClick={()=>filterColumnByType(f)}>{f}</Button>
+                return <Button onClick={()=>filterColumnByType(f)} style={{backgroundColor: !filterSelected.localeCompare(f)?"lightblue":"white"}}>{f}</Button>
+              } else {
+                return null;
               }
             })
           }</span>
