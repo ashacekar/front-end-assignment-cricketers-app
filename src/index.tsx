@@ -1,5 +1,3 @@
-import 'react-app-polyfill/ie11';
-import 'sd-ui-components/dist/styles/smartdrive.css';
 import 'core-js';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
