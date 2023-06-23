@@ -1,21 +1,14 @@
-import 'core-js';
+import 'react-app-polyfill/ie11';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import * as serviceWorker from './serviceWorkerRegistration';
-import HttpsRedirect from 'react-https-redirect';
 import { MainRoutes } from './routes';
-import MessageProvider from './providers/MessageProvider';
-import { LocaleProvider } from './providers/LocaleProvider';
+
 
 (async () => {
   const Root = (
-    <LocaleProvider>
-        <HttpsRedirect>
-                <MessageProvider>
+
                   <MainRoutes />
-                </MessageProvider>
-        </HttpsRedirect>
-    </LocaleProvider>
   );
 
   const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);

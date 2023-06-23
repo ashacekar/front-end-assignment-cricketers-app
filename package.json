@@ -5,13 +5,18 @@
   "private": true,
   "scripts": {
     "start": "./node_modules/.bin/react-scripts start -FAST_REFRESH=true",
-    "build": "./node_modules/.bin/react-scripts build && cp ./build/service-worker.js ./public/service-worker.js",
+    "build": "./node_modules/.bin/react-scripts build",
     "test": "./node_modules/.bin/react-scripts test",
+    "lint": "prettier --check 'src/**/*.{js,ts}' --config=prettier.config.js",
+    "lint-fix": "prettier --write 'src/**/*.{js,ts}' --config=prettier.config.js --write",
     "eject": "./node_modules/.bin/react-scripts eject",
     "test:coverage": "./node_modules/.bin/react-scripts test --coverage --reporters=default --reporters=jest-junit",
     "test:coverage:dev": "./node_modules/.bin/react-scripts test --coverage --reporters=default --reporters=jest-junit --watchAll",
+    "tslint": "tslint --project .",
     "messages:extract": "formatjs extract 'node_modules/@sd-player/**/*.{ts,tsx}' 'src/**/*.{ts,tsx}' --ignore 'src/react-app-env.d.ts' --out-file public/i18n/en-extracted.json --id-interpolation-pattern '[sha512:contenthash:base64:6]'",
-    "messages:compile": "formatjs compile public/i18n/en-extracted.json --out-file public/i18n/en-us.json --format formatter.js && formatjs compile public/i18n/en-extracted.json --out-file public/i18n/en-gb.json --format formatter.js && formatjs compile public/i18n/en-extracted.json --out-file public/i18n/en.json --format formatter.js"
+    "messages:compile": "formatjs compile public/i18n/en-extracted.json --out-file public/i18n/en-us.json --format formatter.js && formatjs compile public/i18n/en-extracted.json --out-file public/i18n/en-gb.json --format formatter.js && formatjs compile public/i18n/en-extracted.json --out-file public/i18n/en.json --format formatter.js",
+    "install:clean": "rm -rf node_modules && yarn",
+    "postinstall": "modclean -r"
   },
   "dependencies": {
     "@testing-library/dom": "^6.11.0",
@@ -25,14 +30,13 @@
     "@types/react-router-dom": "^5.1.7",
     "antd": "^3.26.9",
     "clsx": "^1.1.1",
-    "core-js": "3.0",
-    "date-fns": "^2.16.1",
-    "date-fns-tz": "^1.1.1",
     "dompurify": "^2.0.12",
+    "graphql": "^16.6.0",
     "history": "^4.7.2",
     "intl-messageformat-parser": "^6.0.11",
     "jest-junit": "^6.3.0",
     "lodash": "^4.17.11",
+    "modclean": "^3.0.0-beta.1",
     "node-sass": "^4.9.4",
     "prop-types": "^15.7.2",
     "react": "^18.0.0",
@@ -66,6 +70,21 @@
     "workbox-strategies": "^5.1.3",
     "workbox-streams": "^5.1.3"
   },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "devDependencies": {
     "@formatjs/cli": "^3.2.0",
     "@formatjs/icu-messageformat-parser": "^1.2.1",
@@ -83,22 +102,38 @@
     "tslint-react": "^3.6.0",
     "typescript-tslint-plugin": "^0.3.1"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn run tslint"
+    }
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+  "jest-junit": {
+    "suiteName": "jest tests",
+    "output": ".junit_output/test-results.xml",
+    "classNameTemplate": "{classname} - {title}",
+    "titleTemplate": "{classname} - {title}",
+    "ancestorSeparator": " > ",
+    "usePathForSuiteName": "true"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/apis/**/*.ts",
+      "src/utils/**/*.ts",
+      "!**/index.ts"
     ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "coveragePathIgnorePatterns": [
+      "src/utils/__tests__/response.data.ts"
+    ],
+    "testMatch": [
+      "**/__tests__/**/?(*.)+(spec|test).[jt]s?(x)"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "statements": 80,
+        "branches": 80,
+        "functions": 80,
+        "lines": 80
+      }
+    }
   }
 }

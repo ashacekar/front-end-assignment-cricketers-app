@@ -1,0 +1,24 @@
+{
+  "data": {
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNhcmwiLCJodHRwczovL3NtYXJ0ZHJpdmVzeXN0ZW1zLmNvbS9jb21wYW55X2hhc2giOiIwNlY1IiwiaHR0cHM6Ly9zbWFydGRyaXZlc3lzdGVtcy5jb20vZW1haWwiOiJyeWFuLnN0dWJiZXJmaWVsZEBzbWFydGRyaXZlLm5ldCIsImlhdCI6MTUyOTAwNzU3MywiZXhwIjoxNTI5MDkzOTczLCJhdWQiOiJodHRwczovL3RhcC1zZXJ2aWNlcy5zbWFydGRyaXZlc3lzdGVtcy5jb20iLCJpc3MiOiJodHRwczovL3NtYXJ0ZHJpdmVzeXN0ZW1zLWRldi5hdXRoMC5jb20vIn0.4McqFKB3Nk5Tuvnn7z0YMqurR2pKACCJaU6X_tEYmu4",
+    "accessTokenDecoded": {
+      "https://smartdrivesystems.com/username": "carl",
+      "https://smartdrivesystems.com/company_hash": "06V5",
+      "https://smartdrivesystems.com/email": "ryan.stubberfield@smartdrive.net",
+      "iat": 1529007573,
+      "exp": 1529093973,
+      "aud": "https://tap-services.smartdrivesystems.com",
+      "iss": "https://smartdrivesystems-dev.auth0.com/"
+    },
+    "idToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwczovL3NtYXJ0ZHJpdmVzeXN0ZW1zLmNvbS9jb21wYW55X2hhc2giOiJPSkVHIiwiaHR0cHM6Ly9zbWFydGRyaXZlc3lzdGVtcy5jb20vZW1haWwiOiJBbGVydHMuUUFAc21hcnRkcml2ZS5uZXQiLCJodHRwczovL3NtYXJ0ZHJpdmVzeXN0ZW1zLmNvbS91c2VybmFtZSI6ImxlZW5hcmRyaXZlciIsImlhdCI6MTUzMjQ1NjkwNywiZXhwIjoxNTMyNDYwNTA3LCJhdWQiOiJodHRwczovL3RhcC1zZXJ2aWNlcy5zbWFydGRyaXZlc3lzdGVtcy5jb20iLCJpc3MiOiJodHRwczovL3NtYXJ0ZHJpdmVzeXN0ZW1zLWRldi5hdXRoMC5jb20vIn0.yVTdiac8hvkSgGCl0Boi53j3zlCMP2LB1q1g0uWNQ2A",
+    "idTokenDecoded": {
+      "https://smartdrivesystems.com/company_hash": "OJEG",
+      "https://smartdrivesystems.com/email": "Alerts.QA@smartdrive.net",
+      "https://smartdrivesystems.com/username": "leenardriver",
+      "iat": 1532456907,
+      "exp": 1532460507,
+      "aud": "https://tap-services.smartdrivesystems.com",
+      "iss": "https://smartdrivesystems-dev.auth0.com/"
+    }
+  }
+}
