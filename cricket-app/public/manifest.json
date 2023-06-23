@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Cricketer App",
+  "name": "App to display all cricketer details",
   "icons": [
     {
       "src": "favicon.ico",
