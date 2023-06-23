@@ -4,12 +4,13 @@ import { EmptyTable } from './EmptyTable';
 import getPlayers, { TPlayer } from '../../data/get-players';
 import { Link } from 'react-router-dom';
 import { getPersistedValue, setPersistenceValue, usePersistence } from '../../hooks/usePersistence';
+import { useCricketData } from '../../hooks/useCricketData';
 
 export const DataTable: React.FC<{}> = () => {
   const [pageNumber, setPageNumber] = useState(1);
   const [pageSize,setPageSize] = useState(10);
   const [total,setTotal] = useState(0);
-  const [data,setData] = useState<TPlayer[]>([]);
+  const {data,setData} = useCricketData();
   const [filterData,setFilterData] = useState<TPlayer[]>([]);
   const [filterOptions,setFilterOptions] = useState<String[]>([]);
   const [filterSelected,setFilterSelected] = usePersistence(
@@ -34,10 +35,11 @@ export const DataTable: React.FC<{}> = () => {
     dataIndex: 'name',
     key: 'name',
     sorter: (a: TPlayer, b: TPlayer) => a.name?.localeCompare(b.name!),
-    render: (name: String) => <Link to={{
+    render: (name: String, row: TPlayer) => <Link to={{
       pathname: '/cricketer-details',
-      state: { name, data }
-    }} >{name}</Link>,
+      state: {row, data}
+    }}
+     >{name}</Link>,
   },
   {
     title: 'Description',

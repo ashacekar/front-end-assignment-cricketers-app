@@ -4,12 +4,14 @@ import ReactDOM from 'react-dom/client';
 import * as serviceWorker from './serviceWorkerRegistration';
 import { MainRoutes } from './routes';
 import "antd/dist/antd.css";
+import { CricketDataProvider } from './providers/CricketDataProvider';
 
 
 (async () => {
   const Root = (
-
+                <CricketDataProvider>
                   <MainRoutes />
+                  </CricketDataProvider>
   );
 
   const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);

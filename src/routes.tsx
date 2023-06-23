@@ -1,5 +1,6 @@
 import React from 'react';
-import { Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from "react-router";
+import { Router } from 'react-router-dom';
 import { history } from './history';
 import { Routes } from './models/Routes';
 import { Cricketers } from './components/Cricketers/Cricketers';
