@@ -15,7 +15,7 @@ export const DataTable: React.FC<{}> = () => {
   const [filterOptions,setFilterOptions] = useState<String[]>([]);
   const [filterSelected,setFilterSelected] = usePersistence(
     "filterSelected",
-    getPersistedValue("filterSelected")?getPersistedValue("filterSelected") : "");
+    getPersistedValue("filterSelected")?getPersistedValue("filterSelected") : []);
   const [nameSearch, setNameSearch] = usePersistence(
     "nameSearch",
     getPersistedValue("nameSearch")? getPersistedValue("nameSearch") : "");
@@ -75,11 +75,15 @@ export const DataTable: React.FC<{}> = () => {
 
   useEffect(()=>{
     getPlayers().then((value) => {
-      setTotal(value.length);
       setData(value);
-      setFilterData(value);
-      setFilterOptions([...new Set(value.map(item => item.type as String))])
+      const newData = value.filter(d => {
+        return filterSelected.includes(d.type as String) && (d.name?.toLowerCase() === nameSearch.toLowerCase() || d.name?.toLowerCase()?.includes(nameSearch.toLowerCase() as string));
+      } )
+      setTotal(newData.length); //move hooks
+      setFilterData(newData);
+      setFilterOptions([...new Set(value.map(item => item.type as String))].filter(n => n))
     });
+  // eslint-disable-next-line
   },[])
 
 
@@ -89,27 +93,31 @@ export const DataTable: React.FC<{}> = () => {
     setPageSize(newPageSize as number)
   };
 
-  const filterColumnByType = (filterType: String) => {
-    if(filterType!==filterSelected){
-      setFilterSelected(filterType);
-      setPersistenceValue("filterSelected", filterType);
-    }else{
-      setFilterSelected("");
-    }
+  const filterColumnByType = ( filterKey: String) => {
+  let updatedFilterList: String[] = [];
+  if (filterSelected.includes(filterKey)) {
+      updatedFilterList = filterSelected.filter((e: String) => e !== filterKey);
+  } else {
+    updatedFilterList = filterSelected;
+    updatedFilterList.push(filterKey);
   }
-
-  useEffect(()=>{
-    if(filterSelected!==""){
-    const newData = data.filter(d => {
-    return d.type === filterSelected && (d.name?.toLowerCase() === nameSearch.toLowerCase() || d.name?.toLowerCase()?.includes(nameSearch.toLowerCase() as string));
+  const newData = data.filter(d => {
+    return updatedFilterList.includes(d.type as String) && (d.name?.toLowerCase() === nameSearch.toLowerCase() || d.name?.toLowerCase()?.includes(nameSearch.toLowerCase() as string));
     } )
-    setTotal(newData.length); //move hooks
-    setFilterData(newData);
-    }else{
-      setTotal(data.length); //move hooks
-    setFilterData(data);
-    }
-  },[filterSelected,data,nameSearch])
+  setTotal(newData.length); //move hooks
+  setFilterData(newData);
+  setFilterSelected(updatedFilterList);
+  setPersistenceValue("filterSelected", updatedFilterList);
+};
+
+  // useEffect(()=>{
+  //   const newData = data.filter(d => {
+  //   return filterSelected.includes(d.type) && (d.name?.toLowerCase() === nameSearch.toLowerCase() || d.name?.toLowerCase()?.includes(nameSearch.toLowerCase() as string));
+  //   } )
+  //   setTotal(newData.length); //move hooks
+  //   setFilterData(newData);
+  //   console.log(filterSelected,newData)
+  // },[filterSelected])
 
   const searchByName = (event: any) => {
     const name = event.target.value;
@@ -161,7 +169,7 @@ export const DataTable: React.FC<{}> = () => {
           {
             filterOptions.map((f)=>{
               if(f){
-                return <Button onClick={()=>filterColumnByType(f)} style={{backgroundColor: !filterSelected.localeCompare(f)?"lightblue":"white"}}>{f}</Button>
+                return <Button key={`${f}`} onClick={()=>filterColumnByType(f)} style={{backgroundColor: filterSelected.includes(f)?"lightblue":"white"}}>{f}</Button>
               } else {
                 return null;
               }

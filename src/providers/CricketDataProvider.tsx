@@ -1,4 +1,4 @@
-import React, { createContext, useState, useMemo } from 'react';
+import React, { createContext, useState } from 'react';
 import { TPlayer } from '../data/get-players';
 
 export interface CricketProps {
@@ -19,17 +19,13 @@ export const CricketDataProvider: React.FunctionComponent<Props> = ({children}) 
   const [data, updateData] = useState<TPlayer[]>([]);
 
   const setData = (choice: TPlayer[]) => {
-    console.log("provider:"+data);
     updateData(choice);
   };
 
-  const CricketContextProviderValue = useMemo(
-    () => ({ data, setData }),
-    [data, updateData]
-  )
+
   return (
     <CricketContext.Provider
-      value={CricketContextProviderValue}>
+      value={{data,setData}}>
         {children}
     </CricketContext.Provider>
   );

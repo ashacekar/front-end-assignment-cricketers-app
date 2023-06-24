@@ -19,8 +19,8 @@ export const CricketerDetails: React.FC<{}> = () => {
     getPlayers().then((value) => {
       setData(value);
     });
+  // eslint-disable-next-line
   },[])
-  console.log((location.state as any));
 
   const [columns, ] = useState([
   {
