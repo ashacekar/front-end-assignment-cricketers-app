@@ -5,6 +5,7 @@ import { TPlayer } from '../../data/get-players';
 import { useCricketData } from '../../hooks/useCricketData';
 import { cricketerDetailColumnPreset } from '../../presets/CricketerDetailColumnPreset';
 import { relatedCricketerColumnPreset } from '../../presets/RelatedCricketerColumnPreset';
+import './CricketerDetails.scss';
 
 
 /**
@@ -16,9 +17,10 @@ export const CricketerDetails: React.FC<{}> = () => {
   const {data} = useCricketData();
 
   return (
-    <div style={{backgroundColor: '#6e6d6a', marginLeft: 'auto', marginRight: 'auto',textAlign: 'center', verticalAlign: 'middle', paddingBottom: 20}}>
-      <span style={{color: 'white'}}>{"Cricketer Information"}</span>
+    <div className='detail-section'>
+      <span className="detail-section-title">{"Cricketer Information"}</span>
       <Table
+          className='detail-section-table'
           rowKey={"id"}
           columns={cricketerDetailColumnPreset}
           dataSource={data.filter((d: TPlayer) => {
@@ -28,10 +30,9 @@ export const CricketerDetails: React.FC<{}> = () => {
           scroll={{ x: true }}
           pagination = {false}
         />
-      <br/>
-      <span style={{color: 'white'}}>{"Similar Cricketers"}</span>
-      <br/>
+      <span className="detail-section-title">{"Similar Cricketers"}</span>
        <Table
+          className='detail-section-table'
           rowKey={"id"}
           columns={relatedCricketerColumnPreset}
           dataSource={data.filter((d: TPlayer) => {
@@ -41,8 +42,7 @@ export const CricketerDetails: React.FC<{}> = () => {
           scroll={{ x: true }}
           pagination = {false}
         />
-        <br/>
-      <Button type="primary"><Link to={{ pathname: '/cricketers'}} >{"Back to Cricketers"}</Link></Button>
+      <Button type="primary" className="return-button"><Link to={{ pathname: '/cricketers'}} >{"Back to Cricketers"}</Link></Button>
     </div>
   );
 };

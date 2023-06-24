@@ -1,11 +1,30 @@
 .search-results-card {
+    .filter-options {
+        color: #ffffff;
+     }
+     .filter-options-header {
+        display: block;
+     }
      .action-ribbon{
         margin-bottom: 20px;
+     }
+     .filter-button-selected {
+        background-color: lightblue !important;
+        color: black !important;
+        margin-right: 10px;
+     }
+     .filter-button-unselected {
+        background-color: white !important;
+        color: black !important;
+        margin-right: 10px;
+     }
+    .search-box {
+        margin-left: 20px;
      }
       .ant-card-head {
           min-height: 40px;
           padding: 0px 10px;
-          background-color: #6e6d6a;
+          background-color: black;
 
           .ant-card-head-title {
               margin: 0;
@@ -73,4 +92,20 @@
               padding: 10px 5px 20px;
           }
       }
+  }
+
+  .table-title-section {
+      text-align: center;
+      vertical-align: middle;
+  }
+
+  .app-name {
+      font-weight: bold;
+  }
+
+  .list-section-table {
+      display: block;
+      padding-left: 10px;
+      padding-right: 10px;
+      background-color: #6e6d6a;
   }

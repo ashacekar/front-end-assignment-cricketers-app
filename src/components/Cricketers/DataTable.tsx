@@ -99,19 +99,20 @@ export const DataTable: React.FC<{}> = () => {
   },[filterData])
     
   return (
-    <div style={{marginLeft: 'auto', marginRight: 'auto',textAlign: 'center', verticalAlign: 'middle'}}>
-    <span style={{fontWeight: 'bold'}}>{"Cricket App v1.0.0"}</span>
+    <div className='table-title-section'>
+    <span className='app-name'>{"Cricket App v1.0.0"}</span>
     <Card
       className="search-results-card"
       title={
         <div className="action-ribbon">
-          <span style={{ color: "white"}}>{"Filter Options"}<br/>
+          <span className="filter-options">
+            <span className="filter-options-header">{"Filter Options"}</span>
           {
             filterOptions.map((f)=>{
-                return <Button key={`${f}`} onClick={()=>filterColumnByType(f)} style={{backgroundColor: filterSelected.includes(f)?"lightblue":"white", color: "black", marginRight: 20}}>{f?f:"NA"}</Button>
+                return <Button key={`${f}`} onClick={()=>filterColumnByType(f)} className={filterSelected.includes(f)?"filter-button-selected":"filter-button-unselected"}>{f?f:"NA"}</Button>
             })
           }</span>
-          <span style={{marginLeft: 20}}>
+          <span className="search-box">
             <input type="text" placeholder="Search by name...." value={nameSearch} onChange={searchByName} width={50} height={20}></input>
           </span>
         </div>
@@ -119,6 +120,7 @@ export const DataTable: React.FC<{}> = () => {
       >
       <ConfigProvider renderEmpty={EmptyTable}>
         <Table
+          className='list-section-table'
           rowKey={"id"}
           columns={dataTableColumnPreset}
           dataSource={filterData}
