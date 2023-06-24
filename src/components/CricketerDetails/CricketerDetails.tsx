@@ -16,8 +16,8 @@ export const CricketerDetails: React.FC<{}> = () => {
   const {data} = useCricketData();
 
   return (
-    <div>
-      <b>{"Cricketer Information"}</b>
+    <div style={{backgroundColor: '#6e6d6a', marginLeft: 'auto', marginRight: 'auto',textAlign: 'center', verticalAlign: 'middle', paddingBottom: 20}}>
+      <span style={{color: 'white'}}>{"Cricketer Information"}</span>
       <Table
           rowKey={"id"}
           columns={cricketerDetailColumnPreset}
@@ -29,7 +29,7 @@ export const CricketerDetails: React.FC<{}> = () => {
           pagination = {false}
         />
       <br/>
-      <b>{"Similar Cricketers"}</b>
+      <span style={{color: 'white'}}>{"Similar Cricketers"}</span>
       <br/>
        <Table
           rowKey={"id"}

@@ -6,6 +6,7 @@ import { getPersistedValue, setPersistenceValue, usePersistence } from '../../ho
 import { useCricketData } from '../../hooks/useCricketData';
 import { dataTableColumnPreset } from '../../presets/DataTableColumnPreset';
 import { filterDataWithTypeAndName } from '../../utility/FilterDataWithTypeAndName';
+import './Cricketers.scss';
 
 export const DataTable: React.FC<{}> = () => {
   const [pageNumber, setPageNumber] = useState(1); 
@@ -98,15 +99,16 @@ export const DataTable: React.FC<{}> = () => {
   },[filterData])
     
   return (
-    <div>
+    <div style={{marginLeft: 'auto', marginRight: 'auto',textAlign: 'center', verticalAlign: 'middle'}}>
+    <span style={{fontWeight: 'bold'}}>{"Cricket App v1.0.0"}</span>
     <Card
       className="search-results-card"
       title={
         <div className="action-ribbon">
-          <span>{"Filter Options: "}<br/>
+          <span style={{ color: "white"}}>{"Filter Options"}<br/>
           {
             filterOptions.map((f)=>{
-                return <Button key={`${f}`} onClick={()=>filterColumnByType(f)} style={{backgroundColor: filterSelected.includes(f)?"lightblue":"white"}}>{f?f:"NA"}</Button>
+                return <Button key={`${f}`} onClick={()=>filterColumnByType(f)} style={{backgroundColor: filterSelected.includes(f)?"lightblue":"white", color: "black", marginRight: 20}}>{f?f:"NA"}</Button>
             })
           }</span>
           <span style={{marginLeft: 20}}>
@@ -114,10 +116,7 @@ export const DataTable: React.FC<{}> = () => {
           </span>
         </div>
       }
-      extra={
-        <Button className="edit-columns" size="small">
-        </Button>
-      }>
+      >
       <ConfigProvider renderEmpty={EmptyTable}>
         <Table
           rowKey={"id"}
