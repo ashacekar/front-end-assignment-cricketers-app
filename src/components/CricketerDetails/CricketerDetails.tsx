@@ -17,6 +17,7 @@ export const CricketerDetails: React.FC<{}> = () => {
 
   return (
     <div>
+      <b>{"Cricketer Information"}</b>
       <Table
           rowKey={"id"}
           columns={cricketerDetailColumnPreset}
@@ -28,7 +29,7 @@ export const CricketerDetails: React.FC<{}> = () => {
           pagination = {false}
         />
       <br/>
-      <b>{"Similar Players"}</b>
+      <b>{"Similar Cricketers"}</b>
       <br/>
        <Table
           rowKey={"id"}

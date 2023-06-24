@@ -15,6 +15,7 @@ interface Props {
   children: React.ReactNode;
 }
 
+// Cricket Data Provider to fetch all cricketers data for access across components
 export const CricketDataProvider: React.FunctionComponent<Props> = ({children}) => {
   const [data, updateData] = useState<TPlayer[]>([]);
 

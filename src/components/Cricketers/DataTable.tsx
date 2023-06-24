@@ -5,11 +5,12 @@ import { TPlayer } from '../../data/get-players';
 import { getPersistedValue, setPersistenceValue, usePersistence } from '../../hooks/usePersistence';
 import { useCricketData } from '../../hooks/useCricketData';
 import { dataTableColumnPreset } from '../../presets/DataTableColumnPreset';
+import { filterDataWithTypeAndName } from '../../utility/FilterDataWithTypeAndName';
 
 export const DataTable: React.FC<{}> = () => {
-  const [pageNumber, setPageNumber] = useState(1);
-  const [pageSize,setPageSize] = useState(10);
-  const [total,setTotal] = useState(0);
+  const [pageNumber, setPageNumber] = useState(1); 
+  const [pageSize,setPageSize] = useState(10); 
+  const [total,setTotal] = useState(0); 
   const {data} = useCricketData();
   const [filterData,setFilterData] = useState<TPlayer[]>([]);
   const [filterOptions,setFilterOptions] = useState<String[]>([]);
@@ -20,9 +21,10 @@ export const DataTable: React.FC<{}> = () => {
     "nameSearch",
     getPersistedValue("nameSearch")? getPersistedValue("nameSearch") : "");
 
+  // Whenever cricketer data is updated, filter it as per type and name (as per the searched text)
   useEffect(()=>{
       const newData = data.filter(d => {
-        return filterSelected.includes(d.type as String) && (d.name?.toLowerCase() === nameSearch.toLowerCase() || d.name?.toLowerCase()?.includes(nameSearch.toLowerCase() as string));
+        return filterDataWithTypeAndName(filterSelected,d.type as String,d.name as String, nameSearch);
       } )
       setTotal(newData.length); //move hooks
       setFilterData(newData);
@@ -30,11 +32,13 @@ export const DataTable: React.FC<{}> = () => {
   // eslint-disable-next-line
   },[data])
 
+  // Utility to help with page navigation with pagination
   const handlePagination = (page: number, newPageSize?: number) => {
     setPageNumber(page);
     setPageSize(newPageSize as number)
   };
 
+  // Filters cricketer data by type
   const filterColumnByType = ( filterKey: String) => {
     let updatedFilterList: String[] = [];
     if (filterSelected.includes(filterKey)) {
@@ -44,7 +48,7 @@ export const DataTable: React.FC<{}> = () => {
       updatedFilterList.push(filterKey);
     }
     const newData = data.filter(d => {
-      return updatedFilterList.includes(d.type as String) && (d.name?.toLowerCase() === nameSearch.toLowerCase() || d.name?.toLowerCase()?.includes(nameSearch.toLowerCase() as string));
+      return filterDataWithTypeAndName(updatedFilterList,d.type as String,d.name as String, nameSearch);
     } )
     setTotal(newData.length); //move hooks
     setFilterData(newData);
@@ -53,17 +57,19 @@ export const DataTable: React.FC<{}> = () => {
   };
 
 
+  // Filters cricketer data by searched name
   const searchByName = (event: any) => {
     const name = event.target.value;
     setNameSearch(name);
     setPersistenceValue("nameSearch", nameSearch);
     const newData = data.filter(d => {
-    return (d.name?.toLowerCase() === name.toLowerCase() || d.name?.toLowerCase()?.includes(name.toLowerCase() as string)) && filterSelected.includes(d.type);
+    return filterDataWithTypeAndName(filterSelected,d.type as String,d.name as String, nameSearch);
     } )
     setTotal(newData.length);
     setFilterData(newData);
   }
 
+  // Persists type and searched name in local storage
   useEffect(()=>{
     let appSettings: object[] = [];
     interface LooseObject {
