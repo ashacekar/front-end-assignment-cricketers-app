@@ -13,8 +13,6 @@
     "test:coverage": "./node_modules/.bin/react-scripts test --coverage --reporters=default --reporters=jest-junit",
     "test:coverage:dev": "./node_modules/.bin/react-scripts test --coverage --reporters=default --reporters=jest-junit --watchAll",
     "tslint": "tslint --project .",
-    "messages:extract": "formatjs extract 'node_modules/@sd-player/**/*.{ts,tsx}' 'src/**/*.{ts,tsx}' --ignore 'src/react-app-env.d.ts' --out-file public/i18n/en-extracted.json --id-interpolation-pattern '[sha512:contenthash:base64:6]'",
-    "messages:compile": "formatjs compile public/i18n/en-extracted.json --out-file public/i18n/en-us.json --format formatter.js && formatjs compile public/i18n/en-extracted.json --out-file public/i18n/en-gb.json --format formatter.js && formatjs compile public/i18n/en-extracted.json --out-file public/i18n/en.json --format formatter.js",
     "install:clean": "rm -rf node_modules && yarn",
     "postinstall": "modclean -r"
   },
