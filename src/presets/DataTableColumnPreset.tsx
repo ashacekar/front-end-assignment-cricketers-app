@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { TPlayer } from "./get-players"
+import { TPlayer } from "../data/get-players"
 import React from "react"
 import { convertMilliSecondsToAge } from "../utility/ConvertMilliSecondsToAge"
 

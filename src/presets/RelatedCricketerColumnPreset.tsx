@@ -1,5 +1,5 @@
 import React from "react"
-import { TPlayer } from "./get-players"
+import { TPlayer } from "../data/get-players"
 import { Link } from "react-router-dom"
 
 export const relatedCricketerColumnPreset = [
