@@ -9,4 +9,6 @@
 4. Navigate to '/cricketers' from the homepage to view the app. (Eg: http://localhost:3000/cricketers )
 5. Run yarn test:coverage:dev to run the unit tests
 
+You can refer demo.mp4 to view tutorial
+
 ### Version 1.0.0
