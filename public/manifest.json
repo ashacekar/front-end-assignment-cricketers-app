@@ -18,7 +18,9 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
+  "start_url": "/cricketers/",
+  "orientation": "landscape",
+  "scope": "/cricketers/",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"

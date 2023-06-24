@@ -1,7 +1,7 @@
 {
   "name": "cricket-app",
   "version": "1.0.0",
-  "homepage": ".",
+  "homepage": "/cricketers/",
   "private": true,
   "scripts": {
     "start": "./node_modules/.bin/react-scripts start",
