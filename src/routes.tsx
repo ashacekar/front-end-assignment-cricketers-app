@@ -17,7 +17,6 @@ export const MainRoutes: React.FC = () => {
 const InnerRoutes: React.FC = () => {
   return (
     <Switch>
-      <Route path={Routes.Home} component={Cricketers} />
       <Route path={Routes.Cricketers} component={Cricketers} />
       <Route path={Routes.CricketerDetails} component={CricketerDetails} />
     </Switch>

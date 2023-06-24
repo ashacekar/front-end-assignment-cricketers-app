@@ -37,7 +37,7 @@ export const DataTable: React.FC<{}> = () => {
     sorter: (a: TPlayer, b: TPlayer) => a.name?.localeCompare(b.name!),
     render: (name: String, row: TPlayer) => <Link to={{
       pathname: '/cricketer-details',
-      state: {row, data}
+      state: {row}
     }}
      >{name}</Link>,
   },

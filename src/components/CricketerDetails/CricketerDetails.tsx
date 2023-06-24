@@ -14,7 +14,7 @@ export const CricketerDetails: React.FC<{}> = () => {
     const convertMsToAge = (ms:number) => {
     return Math.floor(ms / 31536000000)
   }
-  const {data } = useCricketData();
+  const {data} = useCricketData();
 
   const [columns, ] = useState([
   {
@@ -62,7 +62,7 @@ export const CricketerDetails: React.FC<{}> = () => {
     key: 'name',
     render: (name: String, row: TPlayer) => <Link to={{
       pathname: '/cricketer-details',
-      state: {row, data}
+      state: {row}
     }}
      >{name}</Link>,
   },
