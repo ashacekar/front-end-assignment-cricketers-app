@@ -1,5 +1,5 @@
-import React, { createContext, useState } from 'react';
-import { TPlayer } from '../data/get-players';
+import React, { createContext, useEffect, useState } from 'react';
+import getPlayers, { TPlayer } from '../data/get-players';
 
 export interface CricketProps {
   data: TPlayer[];
@@ -17,6 +17,13 @@ interface Props {
 
 export const CricketDataProvider: React.FunctionComponent<Props> = ({children}) => {
   const [data, updateData] = useState<TPlayer[]>([]);
+
+  useEffect(()=>{
+    getPlayers().then((value) => {
+      setData(value);
+    });
+    // eslint-disable-next-line
+  },[])
 
   const setData = (choice: TPlayer[]) => {
     updateData(choice);

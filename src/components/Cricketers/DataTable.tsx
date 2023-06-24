@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ConfigProvider, Table, Card, Button } from 'antd';
 import { EmptyTable } from './EmptyTable';
-import getPlayers, { TPlayer } from '../../data/get-players';
+import { TPlayer } from '../../data/get-players';
 import { Link } from 'react-router-dom';
 import { getPersistedValue, setPersistenceValue, usePersistence } from '../../hooks/usePersistence';
 import { useCricketData } from '../../hooks/useCricketData';
@@ -10,7 +10,7 @@ export const DataTable: React.FC<{}> = () => {
   const [pageNumber, setPageNumber] = useState(1);
   const [pageSize,setPageSize] = useState(10);
   const [total,setTotal] = useState(0);
-  const {data,setData} = useCricketData();
+  const {data} = useCricketData();
   const [filterData,setFilterData] = useState<TPlayer[]>([]);
   const [filterOptions,setFilterOptions] = useState<String[]>([]);
   const [filterSelected,setFilterSelected] = usePersistence(
@@ -74,17 +74,14 @@ export const DataTable: React.FC<{}> = () => {
   } ))
 
   useEffect(()=>{
-    getPlayers().then((value) => {
-      setData(value);
-      const newData = value.filter(d => {
+      const newData = data.filter(d => {
         return filterSelected.includes(d.type as String) && (d.name?.toLowerCase() === nameSearch.toLowerCase() || d.name?.toLowerCase()?.includes(nameSearch.toLowerCase() as string));
       } )
       setTotal(newData.length); //move hooks
       setFilterData(newData);
-      setFilterOptions([...new Set(value.map(item => item.type as String))].filter(n => n))
-    });
+      setFilterOptions([...new Set(data.map(item => item.type as String))].filter(n => n))
   // eslint-disable-next-line
-  },[])
+  },[data])
 
 
 
@@ -110,14 +107,6 @@ export const DataTable: React.FC<{}> = () => {
   setPersistenceValue("filterSelected", updatedFilterList);
 };
 
-  // useEffect(()=>{
-  //   const newData = data.filter(d => {
-  //   return filterSelected.includes(d.type) && (d.name?.toLowerCase() === nameSearch.toLowerCase() || d.name?.toLowerCase()?.includes(nameSearch.toLowerCase() as string));
-  //   } )
-  //   setTotal(newData.length); //move hooks
-  //   setFilterData(newData);
-  //   console.log(filterSelected,newData)
-  // },[filterSelected])
 
   const searchByName = (event: any) => {
     const name = event.target.value;

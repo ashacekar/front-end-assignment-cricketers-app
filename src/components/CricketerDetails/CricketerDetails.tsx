@@ -1,7 +1,7 @@
 import { Button, Table } from 'antd';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {Link, useLocation} from 'react-router-dom';
-import getPlayers, { TPlayer } from '../../data/get-players';
+import { TPlayer } from '../../data/get-players';
 import { useCricketData } from '../../hooks/useCricketData';
 
 
@@ -14,13 +14,7 @@ export const CricketerDetails: React.FC<{}> = () => {
     const convertMsToAge = (ms:number) => {
     return Math.floor(ms / 31536000000)
   }
-  const {data, setData} = useCricketData();
-    useEffect(()=>{
-    getPlayers().then((value) => {
-      setData(value);
-    });
-  // eslint-disable-next-line
-  },[])
+  const {data } = useCricketData();
 
   const [columns, ] = useState([
   {
