@@ -114,7 +114,7 @@ export const DataTable: React.FC<{}> = () => {
     setNameSearch(name);
     setPersistenceValue("nameSearch", nameSearch);
     const newData = data.filter(d => {
-    return (d.name?.toLowerCase() === name.toLowerCase() || d.name?.toLowerCase()?.includes(name.toLowerCase() as string)) && d.type === filterSelected;
+    return (d.name?.toLowerCase() === name.toLowerCase() || d.name?.toLowerCase()?.includes(name.toLowerCase() as string)) && filterSelected.includes(d.type);
     } )
     setTotal(newData.length);
     setFilterData(newData);
