@@ -57,6 +57,7 @@ export const DataTable: React.FC<{}> = () => {
     title: 'Type',
     dataIndex: 'type',
     key: 'type',
+    render: (type: String) => <div>{type?type:"NA"}</div>,
   },
   {
     title: 'Points',
@@ -79,7 +80,7 @@ export const DataTable: React.FC<{}> = () => {
       } )
       setTotal(newData.length); //move hooks
       setFilterData(newData);
-      setFilterOptions([...new Set(data.map(item => item.type as String))].filter(n => n))
+      setFilterOptions([...new Set(data.map(item => item.type as String))])
   // eslint-disable-next-line
   },[data])
 
@@ -157,11 +158,7 @@ export const DataTable: React.FC<{}> = () => {
           <span>{"Filter Options: "}<br/>
           {
             filterOptions.map((f)=>{
-              if(f){
-                return <Button key={`${f}`} onClick={()=>filterColumnByType(f)} style={{backgroundColor: filterSelected.includes(f)?"lightblue":"white"}}>{f}</Button>
-              } else {
-                return null;
-              }
+                return <Button key={`${f}`} onClick={()=>filterColumnByType(f)} style={{backgroundColor: filterSelected.includes(f)?"lightblue":"white"}}>{f?f:"NA"}</Button>
             })
           }</span>
           <span style={{marginLeft: 20}}>
