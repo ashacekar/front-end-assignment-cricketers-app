@@ -66,7 +66,7 @@ Cricketer Details Page (http://localhost:3000/cricketer-details)
         Name
         Points
         Rank
-    The similar player's name can be clicked to that cricketer's detailed information as well
+    Any of the similar player's name can be clicked as well to get their respective details on the same page
 
 
 ![alt text](/public/Cricketers-Data%20List-View.png)
