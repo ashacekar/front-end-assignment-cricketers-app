@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import { TPlayer } from "../data/get-players"
 import React from "react"
 import { convertMilliSecondsToAge } from "../utility/ConvertMilliSecondsToAge"
+import { convertCamelCaseToTitleCase } from "../utility/ConvertCamelCaseToTitleCase"
 
 export const dataTableColumnPreset = [
   {
@@ -36,7 +37,7 @@ export const dataTableColumnPreset = [
     title: 'Type',
     dataIndex: 'type',
     key: 'type',
-    render: (type: String) => <div>{type?type:"NA"}</div>,
+    render: (type: String) => <div>{type? convertCamelCaseToTitleCase(type) : "NA"}</div>,
   },
   {
     title: 'Points',

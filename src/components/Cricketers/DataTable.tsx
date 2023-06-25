@@ -7,6 +7,7 @@ import { useCricketData } from '../../hooks/useCricketData';
 import { dataTableColumnPreset } from '../../presets/DataTableColumnPreset';
 import { filterDataWithTypeAndName } from '../../utility/FilterDataWithTypeAndName';
 import './Cricketers.scss';
+import { convertCamelCaseToTitleCase } from '../../utility/ConvertCamelCaseToTitleCase';
 
 export const DataTable: React.FC<{}> = () => {
   const [pageNumber, setPageNumber] = useState(1); 
@@ -109,7 +110,7 @@ export const DataTable: React.FC<{}> = () => {
             <span className="filter-options-header">{"Filter Options"}</span>
           {
             filterOptions.map((f)=>{
-                return <Button key={`${f}`} onClick={()=>filterColumnByType(f)} className={filterSelected.includes(f)?"filter-button-selected":"filter-button-unselected"}>{f?f:"NA"}</Button>
+                return <Button key={`${f}`} onClick={()=>filterColumnByType(f)} className={filterSelected.includes(f)?"filter-button-selected":"filter-button-unselected"}>{f? convertCamelCaseToTitleCase(f) : "NA"}</Button>
             })
           }</span>
           <span className="search-box">

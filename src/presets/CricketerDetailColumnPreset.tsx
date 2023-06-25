@@ -1,5 +1,6 @@
 import React from "react"
 import { convertMilliSecondsToAge } from "../utility/ConvertMilliSecondsToAge"
+import { convertCamelCaseToTitleCase } from "../utility/ConvertCamelCaseToTitleCase"
 
 export const cricketerDetailColumnPreset = [
   {
@@ -16,6 +17,7 @@ export const cricketerDetailColumnPreset = [
     title: 'Type',
     dataIndex: 'type',
     key: 'type',
+    render: (type: String) => <div>{type? convertCamelCaseToTitleCase(type) : "NA"}</div>,
   },
   {
     title: 'Points',
