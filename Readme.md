@@ -24,7 +24,7 @@ You can refer demo.mp4 to view tutorial from here: https://drive.google.com/file
 ## 3. How to Test the App
 1. Run yarn test:coverage:dev to run the unit tests
 
-## 4. Implementaion Images
+## 4. Features
 Cricketers Page (http://localhost:3000/cricketers)
 
     Displays the list of cricketers.
