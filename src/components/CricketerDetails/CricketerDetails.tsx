@@ -43,6 +43,7 @@ export const CricketerDetails: React.FC<{}> = () => {
           pagination = {false}
         />
       <Button type="primary" className="return-button"><Link to={{ pathname: '/cricketers'}} >{"Back to Cricketers"}</Link></Button>
+      <div className='app-name'>{"Cricketer App v1.0.0"}</div>
     </div>
   );
 };

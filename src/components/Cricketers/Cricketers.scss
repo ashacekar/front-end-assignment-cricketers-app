@@ -1,12 +1,16 @@
 .search-results-card {
     .filter-options {
         color: #ffffff;
+        display: block;
      }
      .filter-options-header {
         display: block;
+        text-align: left;
+        cursor: pointer;
      }
-     .action-ribbon{
-        margin-bottom: 20px;
+     .action-ribbon {
+        margin-top: 5px;
+        margin-bottom: 5px;
      }
      .filter-button-selected {
         background-color: lightblue !important;
@@ -18,8 +22,15 @@
         color: black !important;
         margin-right: 10px;
      }
+     .filter-buttons {
+        float: left;
+        display: block;
+        margin-bottom: 5px;
+     }
     .search-box {
         margin-left: 20px;
+        margin-right: 20px;
+        float: right;
      }
       .ant-card-head {
           min-height: 40px;
@@ -101,6 +112,12 @@
 
   .app-name {
       font-weight: bold;
+      text-align: right;
+      padding-right: 10px;
+  }
+
+  .table-name {
+    font-weight: bold;
   }
 
   .list-section-table {

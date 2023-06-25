@@ -2,7 +2,6 @@
       background-color: #6e6d6a;
       text-align: center;
       vertical-align: middle;
-      padding-bottom: 20px;
   }
 
   .detail-section-title {
@@ -22,4 +21,11 @@
   .return-button {
     margin-top: 10px;
     margin-bottom: 10px;
+  }
+
+  .app-name {
+    font-weight: bold;
+    background-color: white;
+    text-align: right;
+    padding-right: 10px;
   }

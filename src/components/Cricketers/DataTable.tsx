@@ -8,6 +8,7 @@ import { dataTableColumnPreset } from '../../presets/DataTableColumnPreset';
 import { filterDataWithTypeAndName } from '../../utility/FilterDataWithTypeAndName';
 import './Cricketers.scss';
 import { convertCamelCaseToTitleCase } from '../../utility/ConvertCamelCaseToTitleCase';
+import { FunnelPlotOutlined } from '@ant-design/icons';
 
 export const DataTable: React.FC<{}> = () => {
   const [pageNumber, setPageNumber] = useState(1); 
@@ -15,6 +16,9 @@ export const DataTable: React.FC<{}> = () => {
   const [total,setTotal] = useState(0); 
   const {data} = useCricketData();
   const [filterData,setFilterData] = useState<TPlayer[]>([]);
+  const [showFilters, setShowFilters] = usePersistence(
+    "showFilters",
+    !!getPersistedValue("showFilters"));
   const [filterOptions,setFilterOptions] = useState<String[]>([]);
   const [filterSelected,setFilterSelected] = usePersistence(
     "filterSelected",
@@ -101,21 +105,26 @@ export const DataTable: React.FC<{}> = () => {
     
   return (
     <div className='table-title-section'>
-    <span className='app-name'>{"Cricket App v1.0.0"}</span>
+    <span className='table-name'>{"Cricketer Data"}</span>
     <Card
       className="search-results-card"
       title={
         <div className="action-ribbon">
-          <span className="filter-options">
-            <span className="filter-options-header">{"Filter Options"}</span>
-          {
-            filterOptions.map((f)=>{
-                return <Button key={`${f}`} onClick={()=>filterColumnByType(f)} className={filterSelected.includes(f)?"filter-button-selected":"filter-button-unselected"}>{f? convertCamelCaseToTitleCase(f) : "NA"}</Button>
-            })
-          }</span>
-          <span className="search-box">
+          <div className="search-box">
             <input type="text" placeholder="Search by name...." value={nameSearch} onChange={searchByName} width={50} height={20}></input>
-          </span>
+          </div>
+          <div className="filter-options">
+            <span className="filter-options-header" onClick={()=>setShowFilters(!showFilters)}>
+              {"Filter Options"} <FunnelPlotOutlined />
+            </span>
+          </div>
+          {showFilters && <div className='filter-buttons'>
+            {
+              filterOptions.map((f)=>{
+                return <Button key={`${f}`} onClick={()=>filterColumnByType(f)} className={filterSelected.includes(f)?"filter-button-selected":"filter-button-unselected"}>{f? convertCamelCaseToTitleCase(f) : "NA"}</Button>
+              })
+            }
+          </div>}
         </div>
       }
       >
@@ -139,6 +148,7 @@ export const DataTable: React.FC<{}> = () => {
         />
       </ConfigProvider>
     </Card>
+    <div className='app-name'>{"Cricketer App v1.0.0"}</div>
     </div>
   );
 };
