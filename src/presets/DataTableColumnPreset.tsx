@@ -29,7 +29,7 @@ export const dataTableColumnPreset = [
     title: 'Age',
     dataIndex: 'dob',
     key: 'dob',
-    render: (age: number) => <div>{convertMilliSecondsToAge(age)}</div>,
+    render: (dob: number) => <div>{convertMilliSecondsToAge(dob)}</div>,
     sorter: (a: TPlayer, b: TPlayer) => convertMilliSecondsToAge(a.dob!) - convertMilliSecondsToAge(b.dob!)
   },
   {

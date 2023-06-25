@@ -3,11 +3,6 @@ import { convertMilliSecondsToAge } from "../utility/ConvertMilliSecondsToAge"
 
 export const cricketerDetailColumnPreset = [
   {
-    title: 'Id',
-    dataIndex: 'id',
-    key: 'id',
-  },
-  {
     title: 'Name',
     dataIndex: 'name',
     key: 'name',
@@ -16,12 +11,6 @@ export const cricketerDetailColumnPreset = [
     title: 'Description',
     dataIndex: 'description',
     key: 'description',
-  },
-  {
-    title: 'Age',
-    dataIndex: 'dob',
-    key: 'dob',
-    render: (age: number) => <div>{convertMilliSecondsToAge(age)}</div>,
   },
   {
     title: 'Type',
@@ -37,5 +26,17 @@ export const cricketerDetailColumnPreset = [
     title: 'Rank',
     dataIndex: 'rank',
     key: 'rank',
-  }
+  },
+  {
+    title: 'Age',
+    dataIndex: 'dob',
+    key: 'dob',
+    render: (dob: number) => <div>{convertMilliSecondsToAge(dob)}</div>,
+  },
+  {
+    title: 'Date of Birth',
+    dataIndex: 'dob',
+    key: 'dob',
+    render: (dob: number) => <div>{(new Date(dob)).toLocaleDateString()}</div>,
+  },
   ]
