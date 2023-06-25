@@ -25,9 +25,48 @@ You can refer demo.mp4 to view tutorial from here: https://drive.google.com/file
 1. Run yarn test:coverage:dev to run the unit tests
 
 ## 4. Implementaion Images
-Cricketers Data List View (http://localhost:3000/cricketers)
-![alt text](/public/Cricketers-Data%20List-View.png)
+Cricketers Page (http://localhost:3000/cricketers)
+
+    Displays the list of cricketers.
+    The list has default pagination with page size of 10 but supports pagination with values 5, 25 and 100.
+    Each item in the list displays below details:
+        Name
+        Type
+        Points
+        Rank
+        Age
+    The list support sorting by:
+        Name
+        Rank
+        Age
+    The list supports filter by:
+        Type
+    The list supports search by Name
+    Screen retains the filter & search criteria on screen refresh
+    Cricketer Name has a link which opens the Cricketer Details screen
+
+![alt text](/public/Cricketer-Info-Page.png)
+
+Cricketer Details Page (http://localhost:3000/cricketer-details)
 
 
-Cricketer Info Page (http://localhost:3000/cricketers)
+    The details screen displays the below details of the cricketer selected:
+        Name
+        Description
+        Type
+        Points
+        Rank
+        Date of Birth
+        Age
+    The details screen has a Back to Cricketers button/link
+    Similar players matching the Type of the player selected are displayed as well. 
+    Like, if a Batsman details are displayed then other batsman details are diaplayed.
+    Maximum 5 similar players are displayed
+    Similar players details are as follows:
+        Name
+        Points
+        Rank
+    The similar player's name can be clicked to that cricketer's detailed information as well
+
+
 ![alt text](/public/Cricketers-Data%20List-View.png)
