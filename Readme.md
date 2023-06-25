@@ -35,7 +35,7 @@ Cricketers Page (http://localhost:3000/cricketers)
         Points
         Rank
         Age
-    The list support sorting by:
+    The list supports sorting by:
         Name
         Rank
         Age
