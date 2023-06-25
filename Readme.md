@@ -19,7 +19,7 @@ For SSH: git clone git@github.com:ashacekar/front-end-assignment-cricketers-app.
 3. Run yarn start to run the project
 4. Navigate to '/cricketers' from the homepage to view the app. (Eg: http://localhost:3000/cricketers )
 
-You can refer demo.mp4 to view tutorial
+You can refer demo.mp4 to view tutorial from here: https://drive.google.com/file/d/1ZPpB_7eJl9W1BRJ9RfTq_dILevw-bvGg/view?usp=sharing
 
 ## 3. How to Test the App
 1. Run yarn test:coverage:dev to run the unit tests
