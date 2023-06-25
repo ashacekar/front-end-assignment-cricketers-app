@@ -119,6 +119,7 @@ export const DataTable: React.FC<{}> = () => {
             </span>
           </div>
           {showFilters && <div className='filter-buttons'>
+            <span className="filter-option-type">{"Type:"}</span>
             {
               filterOptions.map((f)=>{
                 return <Button key={`${f}`} onClick={()=>filterColumnByType(f)} className={filterSelected.includes(f)?"filter-button-selected":"filter-button-unselected"}>{f? convertCamelCaseToTitleCase(f) : "NA"}</Button>
