@@ -22,22 +22,15 @@ export const dataTableColumnPreset = [
      >{name}</Link>,
   },
   {
-    title: 'Description',
-    dataIndex: 'description',
-    key: 'description',
-  },
-  {
-    title: 'Age',
-    dataIndex: 'dob',
-    key: 'dob',
-    render: (dob: number) => <div>{convertMilliSecondsToAge(dob)}</div>,
-    sorter: (a: TPlayer, b: TPlayer) => convertMilliSecondsToAge(a.dob!) - convertMilliSecondsToAge(b.dob!)
-  },
-  {
     title: 'Type',
     dataIndex: 'type',
     key: 'type',
     render: (type: String) => <div>{type? convertCamelCaseToTitleCase(type) : "NA"}</div>,
+  },
+  {
+    title: 'Description',
+    dataIndex: 'description',
+    key: 'description',
   },
   {
     title: 'Points',
@@ -49,7 +42,14 @@ export const dataTableColumnPreset = [
     dataIndex: 'rank',
     key: 'rank',
     sorter: (a: TPlayer, b: TPlayer) => a.rank! - b.rank!
-  }
+  },
+  {
+    title: 'Age',
+    dataIndex: 'dob',
+    key: 'dob',
+    render: (dob: number) => <div>{convertMilliSecondsToAge(dob)}</div>,
+    sorter: (a: TPlayer, b: TPlayer) => convertMilliSecondsToAge(a.dob!) - convertMilliSecondsToAge(b.dob!)
+  },
   ].filter(col => {
     return col.dataIndex !== 'id' && col.dataIndex !== 'description'
   } )

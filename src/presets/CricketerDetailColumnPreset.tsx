@@ -30,15 +30,15 @@ export const cricketerDetailColumnPreset = [
     key: 'rank',
   },
   {
-    title: 'Age',
-    dataIndex: 'dob',
-    key: 'dob',
-    render: (dob: number) => <div>{convertMilliSecondsToAge(dob)}</div>,
-  },
-  {
     title: 'Date of Birth',
     dataIndex: 'dob',
     key: 'dob',
     render: (dob: number) => <div>{(new Date(dob)).toLocaleDateString()}</div>,
   },
+  {
+    title: 'Age',
+    dataIndex: 'dob',
+    key: 'dob',
+    render: (dob: number) => <div>{convertMilliSecondsToAge(dob)}</div>,
+  }
   ]
