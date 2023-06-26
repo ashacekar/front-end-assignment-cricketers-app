@@ -85,7 +85,7 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "7.21.0",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@formatjs/cli": "^3.2.0",
     "@formatjs/icu-messageformat-parser": "^1.2.1",
     "@formatjs/ts-transformer": "^2.12.0",
